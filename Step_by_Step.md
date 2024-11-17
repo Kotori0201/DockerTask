@@ -226,17 +226,51 @@ docker inspect ta-container
 ```
 Present build options to reduce image size and explain & demo (optimize Dockerfile in No.4)
 ```
-## Change base image to alpine
+### Change base image to alpine
 
-## Remove unnecessary package
+### Remove unnecessary package
 
-## Use multi-stage build
+### Use multi-stage build
 
 # Task 7
 ```
 From server A run command to create 2 containers with arbitrary images (note that you must push to Docker Registry and pull back) to share the same volume and share files between each other.
     On server B use volume Ephemeral type
     On server C use volume Persistent type 
+```
+## Volume in Docker
+<p align="center">
+  <img src="types-of-mounts.png" />
+</p>
+
+## Ephemeral volume
+- **Ephemeral volume** là volume tạm thời, dữ liệu sẽ bị mất khi container dừng hoặc bị xóa. Nó thích hợp cho các ứng dụng yêu cầu lưu trữ tạm thời.
+
+- Khi run 1 container, nếu không chỉ định volume thì mặc định dữ liệu sẽ được ghi trên lớp writable container layer. [Refer](https://docs.docker.com/engine/storage/)
+
+- Một dạng khác của Ephemeral là **tmpfs mount**. Nó lưu dữ liệu trong RAM và sẽ mất khi container stop or remove.
+
+### Syntax
+```bash
+
+```
+
+## Persistent volume
+- **Persistent volume** là volume lâu dài, giúp bảo vệ dữ liệu khỏi bị mất khi container bị xóa hoặc dừng, và cho phép chia sẻ dữ liệu giữa các container. Nó thích hợp cho các ứng dụng yêu cầu lưu trữ dữ liệu lâu dài, như cơ sở dữ liệu.
+
+- Có 2 dạng là **volume** và bind **mounts**.
+- **Volume** được lưu trữ trong một phần của hệ thống tệp lưu trữ được quản lý bởi Docker ( /var/lib/docker/volumes/trên Linux). Các quy trình không phải Docker không được sửa đổi phần này của hệ thống tệp. Volume là cách tốt nhất để lưu trữ dữ liệu trong Docker.
+
+- **Bind mount** có thể được lưu trữ ở bất kỳ đâu trên hệ thống máy chủ. Chúng thậm chí có thể là các tệp hệ thống hoặc thư mục quan trọng. Các quy trình không phải Docker trên máy chủ Docker hoặc vùng chứa Docker có thể sửa đổi chúng bất kỳ lúc nào.
+
+### Syntax volume
+```bash
+
+```
+
+### Syntax bind mounts
+```bash
+
 ```
 
 # Task 8
